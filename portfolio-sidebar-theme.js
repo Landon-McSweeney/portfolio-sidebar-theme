@@ -1,84 +1,117 @@
-/**
- * Copyright 2025 Landon-McSweeney
- * @license Apache-2.0, see LICENSE for full text.
- */
-import { LitElement, html, css } from "lit";
-import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
-import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
+import { html, css, LitElement } from "lit";
+import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
-/**
- * `portfolio-sidebar-theme`
- * 
- * @demo index.html
- * @element portfolio-sidebar-theme
- */
-export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
-
-  static get tag() {
-    return "portfolio-sidebar-theme";
+export class PortfolioSidebarTheme extends DDD(LitElement) {
+  static get properties() {
+    return {
+      currentScreen: { type: String },
+    };
   }
 
   constructor() {
     super();
-    this.title = "";
-    this.t = this.t || {};
-    this.t = {
-      ...this.t,
-      title: "Title",
-    };
-    this.registerLocalization({
-      context: this,
-      localesPath:
-        new URL("./locales/portfolio-sidebar-theme.ar.json", import.meta.url).href +
-        "/../",
-      locales: ["ar", "es", "hi", "zh"],
-    });
+    this.currentScreen = "about";
   }
 
-  // Lit reactive properties
-  static get properties() {
-    return {
-      ...super.properties,
-      title: { type: String },
-    };
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener("hashchange", this._handleHashChange.bind(this));
+    this._handleHashChange();
   }
 
-  // Lit scoped styles
+  disconnectedCallback() {
+    window.removeEventListener("hashchange", this._handleHashChange.bind(this));
+    super.disconnectedCallback();
+  }
+
+  _handleHashChange() {
+    const hash = window.location.hash.replace("#", "");
+    if (hash) {
+      this.currentScreen = hash;
+      this._scrollToScreen(hash);
+    }
+  }
+
+  _scrollToScreen(id) {
+    const el = this.shadowRoot.querySelector(`#${id}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  _scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  _handleSidebarClick(screen) {
+    window.location.hash = screen;
+  }
+
   static get styles() {
-    return [super.styles,
-    css`
-      :host {
-        display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
-        font-family: var(--ddd-font-navigation);
-      }
-      .wrapper {
-        margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-4);
-      }
-      h3 span {
-        font-size: var(--portfolio-sidebar-theme-label-font-size, var(--ddd-font-size-s));
-      }
-    `];
+    return [
+      super.styles,
+      css`
+        :host {
+          display: flex;
+          height: 100vh;
+          overflow: hidden;
+          --screen-padding: 2rem;
+          font-family: var(--ddd-font-primary, sans-serif);
+        }
+
+        nav {
+          width: 200px;
+          background-color: var(--ddd-theme-default, #111);
+          color: white;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: var(--screen-padding);
+        }
+
+        nav button {
+          margin: 0.5rem 0;
+          background: none;
+          border: none;
+          color: white;
+          font-size: 1rem;
+          cursor: pointer;
+          text-align: left;
+        }
+
+        nav button:hover {
+          text-decoration: underline;
+        }
+
+        .screens {
+          flex: 1;
+          overflow-y: auto;
+          scroll-behavior: smooth;
+        }
+
+        ::slotted(*) {
+          min-height: 100vh;
+          padding: var(--screen-padding);
+        }
+      `,
+    ];
   }
 
-  // Lit render the HTML
   render() {
     return html`
-<div class="wrapper">
-  <h3><span>${this.t.title}:</span> ${this.title}</h3>
-  <slot></slot>
-</div>`;
-  }
-
-  /**
-   * haxProperties integration via file reference
-   */
-  static get haxProperties() {
-    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
-      .href;
+      <nav>
+        <button @click="${() => this._handleSidebarClick("about")}">About</button>
+        <button @click="${() => this._handleSidebarClick("projects")}">Projects</button>
+        <button @click="${() => this._handleSidebarClick("skills")}">Skills</button>
+        <button @click="${() => this._handleSidebarClick("contact")}">Contact</button>
+        <button @click="${() => this._handleSidebarClick("extra")}">Extra</button>
+        <button @click="${this._scrollToTop}">↑ Top</button>
+      </nav>
+      <div class="screens">
+        <slot></slot>
+      </div>
+    `;
   }
 }
 
-globalThis.customElements.define(PortfolioSidebarTheme.tag, PortfolioSidebarTheme);
+customElements.define("portfolio-sidebar-theme", PortfolioSidebarTheme);
