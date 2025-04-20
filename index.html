@@ -4,10 +4,8 @@
     <meta charset="UTF-8" />
     <title>Portfolio Sidebar Theme</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Load web components and polyfills if needed -->
     <script type="module" src="./portfolio-sidebar-theme.js"></script>
     <script type="module" src="./portfolio-screen.js"></script>
-    <!-- Optional: Add DDD fonts or styles here -->
     <style>
       body {
         margin: 0;
@@ -15,32 +13,47 @@
       }
     </style>
   </head>
-
   <body>
     <portfolio-sidebar-theme>
       <portfolio-screen id="about" title="About" style="background-color: var(--ddd-theme-accent-1);">
-        <h1>About Me</h1>
-        <p>Welcome to my portfolio! I'm building this using the HAX toolchain and web components.</p>
+        <div style="text-align: center; padding-top: 2rem;">
+          <img src="/Users/landonmcsweeney/Documents/210 ScreenShots/thumbnail_McSweeney Landon -1.jpg" alt="Professional portfolio thumbnail" />
+          <p style="font-size: 1rem; margin: 0;">Professional</p>
+          <h1 style="font-size: 3rem; font-weight: bold;">PORTFOLIO</h1>
+        </div>
+
+        <div style="margin-top: -4px; background: #4392f1; padding: 2rem 0; color: white; font-size: 2rem; font-weight: bold;">
+          About
+        </div>
+
+        <div style="display: flex; gap: 2rem; padding: 2rem;">
+          <img src="/Users/landonmcsweeney/Documents/210 ScreenShots/thumbnail_McSweeney Landon -1.jpg" alt="headshot" style="width: 200px; height: auto; border-radius: 8px;" />
+          <div>
+            <p><strong>Brief professional bio:</strong> Research focus, academic background, key achievements.</p>
+            <p><strong>Professional headshot:</strong> Seen left.</p>
+            <p><strong>Mission statement:</strong> Concise mission statement or research interests.</p>
+          </div>
+        </div>
       </portfolio-screen>
 
       <portfolio-screen id="projects" title="Projects" style="background-color: var(--ddd-theme-accent-3);">
         <h1>Projects</h1>
-        <p>Here are some of the cool things I’ve built.</p>
+        <p>Project summaries or links here.</p>
       </portfolio-screen>
 
       <portfolio-screen id="skills" title="Skills" style="background-color: var(--ddd-theme-accent-5);">
         <h1>Skills</h1>
-        <p>I know HTML, CSS, JavaScript, Lit, DDD, and more!</p>
+        <p>Languages, frameworks, tools, certifications.</p>
       </portfolio-screen>
 
       <portfolio-screen id="contact" title="Contact" style="background-color: var(--ddd-theme-accent-7);">
-        <h1>Contact Me</h1>
-        <p>Email me or find me on GitHub!</p>
+        <h1>Contact</h1>
+        <iframe src="https://forms.gle/forms-placeholder" width="100%" height="400px" style="border: none;" title="Contact Form for Portfolio Sidebar Theme"></iframe>
       </portfolio-screen>
 
       <portfolio-screen id="extra" title="Extra" style="background-color: var(--ddd-theme-accent-9);">
-        <h1>Fun Stuff</h1>
-        <p>Here’s some extra content or a fun component.</p>
+        <h1>Extras</h1>
+        <p>Fun facts, hobbies, or extra links.</p>
       </portfolio-screen>
     </portfolio-sidebar-theme>
   </body>
