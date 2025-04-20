@@ -1,5 +1,5 @@
 import { html, css, LitElement } from 'lit';
-import { DDD } from '@haxtheweb/d-d-d/ddd.js';
+import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
 export class PortfolioScreen extends DDD(LitElement) {
   static get tag() {
