@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="./portfolio-sidebar-theme.js"></script>
     <script type="module" src="./portfolio-screen.js"></script>
-    <script type="module" src="./wave-divider.js"></script>
     <style>
       body {
         margin: 0;
@@ -21,12 +20,18 @@
       <portfolio-screen id="about">
         <div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: 4rem;">
           <img src="./headshot.jpg" alt="Landon McSweeney headshot" width="100" style="border-radius: 50%;" />
-          <p style="font-size: 1rem; margin: 0;">Landon McSweeney</p>
+          <p style="font-size: 1rem; margin: 0;">Professional</p>
           <h1 style="font-size: 3rem; font-weight: bold; margin: 0;">PORTFOLIO</h1>
         </div>
 
-        <wave-divider></wave-divider>
+        <!-- INLINE WAVE -->
+        <div style="margin-top: -4px;">
+          <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="width: 100%; height: auto;">
+            <path fill="#4392f1" d="M0,64L1440,0L1440,120L0,120Z"></path>
+          </svg>
+        </div>
 
+        <!-- BIO SECTION -->
         <div style="max-width: 700px; margin: 2rem auto; padding: 0 1rem;">
           <p>
             I'm Landon McSweeney — a cybersecurity major, developer, hockey player, and lifelong car enthusiast with a passion for innovation and building from the ground up.
