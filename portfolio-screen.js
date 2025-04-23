@@ -1,42 +1,21 @@
 import { html, css, LitElement } from 'lit';
-import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
-export class PortfolioScreen extends DDD(LitElement) {
+export class PortfolioScreen extends LitElement {
   static get tag() {
     return 'portfolio-screen';
   }
 
-  static get properties() {
-    return {
-      title: { type: String },
-    };
-  }
-
-  static get styles() {
-    return [
-      super.styles,
-      css`
-        :host {
-          display: block;
-          height: 100vh;
-          padding: 2rem;
-          box-sizing: border-box;
-        }
-      `
-    ];
-  }
-
-  constructor() {
-    super();
-    this.title = '';
-  }
+  static styles = css`
+    :host {
+      display: block;
+      height: 100vh;
+      box-sizing: border-box;
+      padding: 0;
+    }
+  `;
 
   render() {
-    return html`
-      <section>
-        <slot></slot>
-      </section>
-    `;
+    return html`<slot></slot>`;
   }
 }
 

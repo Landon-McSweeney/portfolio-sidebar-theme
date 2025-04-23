@@ -1,75 +1,60 @@
 import { html, css, LitElement } from 'lit';
-import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
-export class PortfolioSidebarTheme extends DDD(LitElement) {
+export class PortfolioSidebarTheme extends LitElement {
   static get tag() {
     return 'portfolio-sidebar-theme';
   }
 
-  static get styles() {
-    return [
-      super.styles,
-      css`
-        :host {
-          display: flex;
-          height: 100vh;
-          width: 100vw;
-          overflow: hidden;
-        }
+  static styles = css`
+    :host {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-        nav {
-          width: 80px;
-          background-color: var(--ddd-theme-default-blue, #002a5c);
-          color: white;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 2rem;
-          padding-top: 2rem;
-        }
+    nav {
+      width: 100px;
+      background-color: #2d3e50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      color: white;
+      padding-top: 2rem;
+    }
 
-        main {
-          flex: 1;
-          overflow-y: auto;
-          scroll-behavior: smooth;
-        }
+    main {
+      flex: 1;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
 
-        button {
-          background: none;
-          border: none;
-          color: white;
-          writing-mode: vertical-rl;
-          transform: rotate(180deg);
-          cursor: pointer;
-          font-size: 0.8rem;
-          letter-spacing: 1px;
-        }
+    button {
+      background: none;
+      border: none;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      letter-spacing: 0.1em;
+      font-size: 0.8rem;
+      padding: 0;
+    }
 
-        #scrollTopBtn {
-          position: fixed;
-          bottom: 16px;
-          right: 16px;
-          z-index: 100;
-          background-color: var(--ddd-theme-default-blue, #002a5c);
-          color: white;
-          border: none;
-          padding: 10px 12px;
-          border-radius: 50%;
-          font-size: 1rem;
-          cursor: pointer;
-        }
-      `
-    ];
-  }
+    button:focus {
+      outline: 2px solid white;
+      outline-offset: 2px;
+    }
+  `;
 
   constructor() {
     super();
-    this.sections = ['about', 'projects', 'skills', 'contact', 'extra'];
+    this.sections = ['about', 'cv', 'research', 'contact', 'extra'];
   }
 
   firstUpdated() {
-    // Scroll to hash if present on load
     const hash = window.location.hash.replace('#', '');
     if (hash) {
       this.scrollToSection(hash);
@@ -77,7 +62,7 @@ export class PortfolioSidebarTheme extends DDD(LitElement) {
   }
 
   scrollToSection(id) {
-    const el = this.renderRoot.querySelector(`#${id}`);
+    const el = this.renderRoot.querySelector(`#${id}`) || document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
       history.pushState(null, '', `#${id}`);
@@ -89,16 +74,13 @@ export class PortfolioSidebarTheme extends DDD(LitElement) {
       <nav>
         ${this.sections.map(
           section => html`
-            <button @click="${() => this.scrollToSection(section)}">
-              ${section.toUpperCase()}
-            </button>
+            <button @click="${() => this.scrollToSection(section)}">${section.toUpperCase()}</button>
           `
         )}
       </nav>
       <main>
         <slot></slot>
       </main>
-      <button id="scrollTopBtn" @click="${() => this.scrollToSection(this.sections[0])}">↑</button>
     `;
   }
 }

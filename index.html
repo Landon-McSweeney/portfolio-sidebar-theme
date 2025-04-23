@@ -6,55 +6,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="./portfolio-sidebar-theme.js"></script>
     <script type="module" src="./portfolio-screen.js"></script>
+    <script type="module" src="./wave-divider.js"></script>
     <style>
       body {
         margin: 0;
-        font-family: var(--ddd-font-primary, sans-serif);
+        font-family: "Open Sans", sans-serif;
       }
     </style>
   </head>
   <body>
     <portfolio-sidebar-theme>
-      <portfolio-screen id="about" title="About" style="background-color: var(--ddd-theme-accent-1);">
-        <div style="text-align: center; padding-top: 2rem;">
-          <img src="/Users/landonmcsweeney/Documents/210 ScreenShots/thumbnail_McSweeney Landon -1.jpg" alt="Professional portfolio thumbnail" />
-          <p style="font-size: 1rem; margin: 0;">Professional</p>
-          <h1 style="font-size: 3rem; font-weight: bold;">PORTFOLIO</h1>
+
+      <!-- ABOUT -->
+      <portfolio-screen id="about">
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: 4rem;">
+          <img src="./headshot.jpg" alt="Landon McSweeney headshot" width="100" style="border-radius: 50%;" />
+          <p style="font-size: 1rem; margin: 0;">Landon McSweeney</p>
+          <h1 style="font-size: 3rem; font-weight: bold; margin: 0;">PORTFOLIO</h1>
         </div>
 
-        <div style="margin-top: -4px; background: #4392f1; padding: 2rem 0; color: white; font-size: 2rem; font-weight: bold;">
-          About
+        <wave-divider></wave-divider>
+
+        <div style="max-width: 700px; margin: 2rem auto; padding: 0 1rem;">
+          <p>
+            I'm Landon McSweeney — a cybersecurity major, developer, hockey player, and lifelong car enthusiast with a passion for innovation and building from the ground up.
+          </p>
+          <p>
+            My academic work centers on cybersecurity and systems thinking, but I also specialize in web development using modern tools like Lit, HAX, and Web Components.
+            I value clean, accessible code and love projects that balance technical complexity with great user experiences.
+          </p>
+          <p>
+            Whether it’s writing secure code, working on cars, or pushing myself on the ice, I bring energy, discipline, and a drive to improve.
+            My ultimate goal is to become an entrepreneur — building tech that solves real problems and empowers others.
+          </p>
         </div>
+      </portfolio-screen>
 
-        <div style="display: flex; gap: 2rem; padding: 2rem;">
-          <img src="/Users/landonmcsweeney/Documents/210 ScreenShots/thumbnail_McSweeney Landon -1.jpg" alt="headshot" style="width: 200px; height: auto; border-radius: 8px;" />
-          <div>
-            <p><strong>Brief professional bio:</strong> Research focus, academic background, key achievements.</p>
-            <p><strong>Professional headshot:</strong> Seen left.</p>
-            <p><strong>Mission statement:</strong> Concise mission statement or research interests.</p>
-          </div>
+      <!-- CV -->
+      <portfolio-screen id="cv">
+        <div style="padding: 3rem;">
+          <h1>CV</h1>
+          <p>Education, experience, and achievements will be listed here.</p>
         </div>
       </portfolio-screen>
 
-      <portfolio-screen id="projects" title="Projects" style="background-color: var(--ddd-theme-accent-3);">
-        <h1>Projects</h1>
-        <p>Project summaries or links here.</p>
+      <!-- RESEARCH -->
+      <portfolio-screen id="research">
+        <div style="padding: 3rem;">
+          <h1>Research</h1>
+          <p>Project summaries, research focus, and outcomes can be described here.</p>
+        </div>
       </portfolio-screen>
 
-      <portfolio-screen id="skills" title="Skills" style="background-color: var(--ddd-theme-accent-5);">
-        <h1>Skills</h1>
-        <p>Languages, frameworks, tools, certifications.</p>
+      <!-- CONTACT -->
+      <portfolio-screen id="contact">
+        <div style="padding: 3rem;">
+          <h1>Contact</h1>
+          <p>You can reach me using the contact form below.</p>
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSczKoWy2lO_3chDwzUu7x8hh2A9vReSK_JAvCDArWx0T4T0lw/viewform?embedded=true"
+            width="100%"
+            height="400"
+            frameborder="0"
+            style="border: none;"
+            title="Contact Form">
+          </iframe>
+        </div>
       </portfolio-screen>
 
-      <portfolio-screen id="contact" title="Contact" style="background-color: var(--ddd-theme-accent-7);">
-        <h1>Contact</h1>
-        <iframe src="https://forms.gle/forms-placeholder" width="100%" height="400px" style="border: none;" title="Contact Form for Portfolio Sidebar Theme"></iframe>
+      <!-- EXTRA -->
+      <portfolio-screen id="extra">
+        <div style="padding: 3rem;">
+          <h1>Extra</h1>
+          <p></p>
+        </div>
       </portfolio-screen>
 
-      <portfolio-screen id="extra" title="Extra" style="background-color: var(--ddd-theme-accent-9);">
-        <h1>Extras</h1>
-        <p>Fun facts, hobbies, or extra links.</p>
-      </portfolio-screen>
     </portfolio-sidebar-theme>
   </body>
 </html>
