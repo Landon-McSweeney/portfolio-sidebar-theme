@@ -28,6 +28,7 @@ export class PortfolioSidebarTheme extends LitElement {
       flex: 1;
       overflow-y: auto;
       scroll-behavior: smooth;
+      position: relative;
     }
 
     button {
@@ -47,6 +48,21 @@ export class PortfolioSidebarTheme extends LitElement {
       outline: 2px solid white;
       outline-offset: 2px;
     }
+
+    #scrollToTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      background-color: #4392f1;
+      color: white;
+      border: none;
+      padding: 0.75rem 1rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: none;
+    }
   `;
 
   constructor() {
@@ -58,6 +74,18 @@ export class PortfolioSidebarTheme extends LitElement {
     const hash = window.location.hash.replace('#', '');
     if (hash) {
       this.scrollToSection(hash);
+    }
+    const scrollBtn = this.shadowRoot.getElementById('scrollToTop');
+    const mainSlot = this.shadowRoot.querySelector('main');
+
+    if (scrollBtn && mainSlot) {
+      mainSlot.addEventListener('scroll', () => {
+        scrollBtn.style.display = mainSlot.scrollTop > 300 ? 'block' : 'none';
+      });
+
+      scrollBtn.addEventListener('click', () => {
+        mainSlot.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     }
   }
 
@@ -80,6 +108,7 @@ export class PortfolioSidebarTheme extends LitElement {
       </nav>
       <main>
         <slot></slot>
+        <button id="scrollToTop" title="Back to Top">↑ Top</button>
       </main>
     `;
   }
